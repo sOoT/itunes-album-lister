@@ -1,0 +1,22 @@
+@import '../../../../styles/variables';
+
+.album-list {
+  --columns: 1fr;
+
+  @media (min-width: $m) {
+      --columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $l) {
+      --columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: $uxga) {
+      --columns: repeat(6, 1fr);
+  }
+
+
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: var(--columns);
+}

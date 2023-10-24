@@ -1,0 +1,47 @@
+$screen-xs: (min-width: 320px);
+$screen-s: (min-width: 375px);
+$screen-m: (min-width: 768px);
+$screen-l: (min-width: 1024px);
+$screen-xl: (min-width: 1448px);
+
+$screen-gte-xs: (min-width: 320px);
+$screen-gte-s: (min-width: 375);
+$screen-gte-m: (min-width: 768px);
+$screen-gte-l: (width: 1024px);
+$screen-gte-xl: (width: 1448px);
+$screen-gte-vga: (width: 640px);
+$screen-gte-hd: (width: 1280px);
+$screen-gte-uxga: (width: 1600px);
+$screen-gte-full-hd: (width: 1920px);
+$screen-gte-full-hd-and-gap: (width: 1952px);
+
+// $screen-gt-xs: (width > 320px);
+// $screen-gt-s: (width > 375px);
+// $screen-gt-m: (width > 768px);
+// $screen-gt-l: (width > 1024px);
+// $screen-gt-xl: (width > 1448px);
+// $screen-gt-vga: (width > 640px);
+// $screen-gt-hd: (width > 1280px);
+// $screen-gt-uxga: (width > 1600px);
+// $screen-gt-full-hd: (width > 1920px);
+
+// $screen-lte-xs: (width <= 320px);
+// $screen-lte-s: (width <= 375px);
+// $screen-lte-m: (width <= 768px);
+// $screen-lte-l: (width <= 1024px);
+// $screen-lte-xl: (width <= 1448px);
+// $screen-lte-vga: (width <= 640px);
+// $screen-lte-hd: (width <= 1280px);
+// $screen-lte-uxga: (width <= 1600px);
+// $screen-lte-full-hd: (width <= 1920px);
+
+// $screen-lt-s: (width < 375px);
+// $screen-lt-m: (width < 768px);
+// $screen-lt-l: (width < 1024px);
+// $screen-lt-xl: (width < 1448px);
+// $screen-lt-vga: (width < 640px);
+// $screen-lt-hd: (width < 1280px);
+// $screen-lt-uxga: (width < 1600px);
+// $screen-lt-full-hd: (width < 1920px);
+
+$screen-touch-only: (hover: none);

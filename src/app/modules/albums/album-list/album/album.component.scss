@@ -1,0 +1,22 @@
+.album {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-m);
+    box-shadow: var(--box-shadow-100);
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+
+  > figure {
+    aspect-ratio: 1;
+    position: relative;
+    width: 100%;
+    img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+}
