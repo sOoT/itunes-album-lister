@@ -1,0 +1,57 @@
+html {
+    font-size: 16px;
+}
+
+:root {
+  --xs: #{$xs};
+  --s: #{$s};
+  --m: #{$m};
+  --l: #{$l};
+  --xl: #{$xl};
+  --hd: #{$hd};
+  --uxga: #{$uxga};
+  --full-hd: #{$full-hd};
+
+  --gap: 1rem;
+  --gap-xxxs: calc(var(--gap) * .125);
+  --gap-xxs: calc(var(--gap) * .25);
+  --gap-xs: calc(var(--gap) * .375);
+  --gap-s: calc(var(--gap) * .5);
+  --gap-m: calc(var(--gap) * .75);
+  --gap-l: calc(var(--gap) * .825);
+  --gap-xl: calc(var(--gap) * 1.25);
+  --gap-xxl: calc(var(--gap) * 1.5);
+  --gap-xxxl: calc(var(--gap) * 2);
+  --gap-xxxxl: calc(var(--gap) * 2.5);
+
+  --fixed-gap: 1rem;
+  --fixed-gap-xxxs: calc(1rem * .125);
+  --fixed-gap-xxs: calc(1rem * .25);
+  --fixed-gap-xs: calc(1rem * .375);
+  --fixed-gap-s: calc(1rem * .5);
+  --fixed-gap-m: calc(1rem * .75);
+  --fixed-gap-l: calc(1rem * .825);
+  --fixed-gap-xl: calc(1rem * 1.25);
+  --fixed-gap-xxl: calc(1rem * 1.5);
+  --fixed-gap-xxxl: calc(1rem * 2);
+  --fixed-gap-xxxxl: calc(1rem * 2.5);
+
+  --column-count: 6;
+  --scrollbar-width: 0px;
+
+  --border-radius-s: .25rem;
+  --border-radius-m: .5rem;
+  --border-radius-l: .75rem;
+
+  /* inline offset of main content section */
+  --main-inline-offset: var(--gap);
+
+  @media (min-width: #{$m}) {
+      --gap: 2rem;
+      --column-count: 12;
+  }
+
+  @media (min-width: #{$xl}) {
+      --main-inline-offset: max(var(--gap), calc((100vw - var(--scrollbar-width) - #{$xl}) / 2));
+  }
+}

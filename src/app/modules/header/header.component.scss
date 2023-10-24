@@ -1,0 +1,27 @@
+@import 'src/styles/variables';
+
+.header {
+  --grid-template-columns: 1fr;
+  --gap: var(--gap-m);
+  padding-block-start: var(--gap-l);
+  
+  @media (min-width: #{$m}){
+    --grid-template-columns: 1fr 1fr;
+    --gap: var(--gap-l);
+  }
+
+  @media (min-width: #{$l}){
+    --grid-template-columns: 2fr 1fr;
+  }
+
+  display: grid;
+  grid-template-columns: var(--grid-template-columns);
+  gap: var(--gap);
+
+  .logo {
+    --header-spacing-bottom-xl: 0;
+
+    font-weight: var(--font-weight-bold);
+    letter-spacing: calc(var(--fixed-gap) / 6 * -1);
+  }
+}

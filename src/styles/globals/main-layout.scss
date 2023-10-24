@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  row-gap: var(--gap);
+  grid-template-areas: 
+        ". head ."
+        ". main .";
+  grid-template-columns: var(--main-inline-offset) auto var(--main-inline-offset);
+  grid-template-rows: min-content auto min-content;
+  line-height: var(--line-height-base);
+  min-height: 100vh;
+  overflow-y: scroll;
+}

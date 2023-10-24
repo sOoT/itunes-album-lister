@@ -1,0 +1,78 @@
+p {
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-base);
+    font-weight: var(--font-weight-normal);
+
+    @media (--l) {
+        font-size: var(--font-size-l);
+    }
+
+    &.demibold {
+        font-weight: var(--font-weight-medium);
+    }
+
+    &.bold {
+        font-weight: var(--font-weight-bold);
+    }
+
+    &:empty {
+        display: none;
+    }
+
+    &:not(:last-child) {
+        margin-block-end: var(--fixed-gap);
+    }
+}
+
+.p--small, p.small {
+    font-size: var(--font-size-s);
+}
+
+.p--medium, p.medium {
+    font-size: var(--font-size-m);
+}
+
+span.label {
+    font-size: var(--font-size-xs);
+    color: var(--color-grey-dark2);
+}
+
+$h1: "h1, .h1";
+$h2: "h2, .h2";
+$h3: "h3, .h3";
+$h4: "h4, .h4";
+$h5: "h5, .h5";
+$h6: "h6, .h6";
+$heading: #{$h1}, #{$h2}, #{$h3}, #{$h4}, #{$h5};
+
+#{$heading} {
+  margin-bottom: var(--header-spacing-bottom);
+  line-height: var(--line-height-base);
+}
+
+#{$h1}, #{$h2}, #{$h3} {
+    font-weight: var(--font-weight-bold);
+}
+
+#{$h1} {
+    font-size: var(--font-size-h1);
+    margin-bottom: var(--header-spacing-bottom-xl);
+}
+
+#{$h2} {
+    font-size: var(--font-size-h2);
+}
+
+#{$h3} {
+    font-size: var(--font-size-h3);
+
+    &.regular {
+        font-weight: var(--font-weight-normal);
+    }
+}
+
+hr {
+    border-style: none;
+    border-top: 1px solid var(--color-grey-med1);
+    margin-block: var(--fixed-gap-xxxxl);
+}
