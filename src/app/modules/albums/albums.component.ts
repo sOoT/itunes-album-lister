@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.scss']
 })
-export class AlbumsComponent {
-
+export class AlbumsComponent implements OnInit {
+  ngOnInit(): void {
+    
+  }
 }

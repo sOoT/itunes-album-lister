@@ -9,6 +9,9 @@ import { AlbumListComponent } from './modules/albums/album-list/album-list.compo
 import { AlbumDetailComponent } from './modules/albums/album-detail/album-detail.component';
 import { SearchComponent } from './modules/header/search/search.component';
 import { AlbumComponent } from './modules/albums/album-list/album/album.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FiltersComponent } from './modules/albums/album-list/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import { AlbumComponent } from './modules/albums/album-list/album/album.componen
     AlbumListComponent,
     AlbumDetailComponent,
     SearchComponent,
-    AlbumComponent
+    AlbumComponent,
+    FiltersComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

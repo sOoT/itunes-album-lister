@@ -1,25 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as beatlesResults from '../../../data/beatles.json';
-import { Result, Results } from 'src/app/interfaces/result';
-import { Album } from '../album.model';
+import { Result, Results } from 'src/app/interfaces/result.interface';
+import { Album } from '../../../models/album.model';
+import { AlbumsService } from '../albums.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-album-list',
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.scss']
 })
-export class AlbumListComponent implements OnInit {
+export class AlbumListComponent implements OnInit, OnDestroy {
   data: Results = beatlesResults;
-  albums: Album[] = [];
+  albums: Album[];
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(
+    private albumsService: AlbumsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    console.log('this.data', this.data);
-    this.albums = this.data.results.map((result: Result) => {
-      const artworkUrl600 = result.artworkUrl100.replace('100x100', '600x600');
-      return new Album(result.collectionName, artworkUrl600, result.artistName, result.primaryGenreName, result.releaseDate);
-    });
+    console.log(this.route.snapshot.params)
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          console.log(params)
+        }
+      );
+    this.subscription = this.albumsService.albumsChanged
+      .subscribe((albums: Album[]) => {
+        this.albums = albums;
+      });
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

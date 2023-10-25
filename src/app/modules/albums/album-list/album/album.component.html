@@ -5,4 +5,5 @@
   <div>
     <h3>{{album.name}}</h3>
   </div>
+  <a [routerLink]="['album/' + album.artistId + '/' + album.id]" (click)="onClick()"></a>
 </div>

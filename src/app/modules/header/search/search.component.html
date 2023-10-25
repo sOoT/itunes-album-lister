@@ -1,3 +1,10 @@
 <div class="search-box">
-  <input type="search" placeholder="Search Albums in iTunes">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <input 
+      type="search"
+      id="search"
+      name="search"
+      formControlName="search"
+      placeholder="Search Albums in iTunes">
+  </form>
 </div>

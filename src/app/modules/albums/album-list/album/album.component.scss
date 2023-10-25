@@ -8,6 +8,12 @@
     overflow: hidden;
     position: relative;
 
+  > a {
+    display: block;
+    inset: 0;
+    position: absolute;
+  }
+
   > figure {
     aspect-ratio: 1;
     position: relative;

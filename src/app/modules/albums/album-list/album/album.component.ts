@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Album } from '../../album.model';
+import { Album } from '../../../../models/album.model';
 
 @Component({
   selector: 'app-album',
@@ -8,7 +8,12 @@ import { Album } from '../../album.model';
 })
 export class AlbumComponent implements OnInit {
   @Input() album!: Album;
+  @Input() index!: number;
   
   ngOnInit(): void {
+  }
+
+  onClick() {
+    console.log(this.album)
   }
 }
