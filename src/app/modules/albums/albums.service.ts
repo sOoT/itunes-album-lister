@@ -7,16 +7,23 @@ import { Artist } from "src/app/models/artist.model";
 @Injectable({ providedIn: "root" })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
-  artistsChanged = new Subject<string[]>();
+  artistsChanged = new Subject<Artist[]>();
   albums: Album[] = [];
   artists: Artist[] = [];
 
+  /**
+   * Return albums list
+   * @returns {Album[]}
+   */
   getAlbums() {
     return this.albums.slice();
   }
 
+  /**
+   * Set albums list from response
+   * @param {Result[]} response
+   */
   setAlbums(response: Result[]) {
-    this.artists = [];
     this.albums = [];
     response.forEach((result: Result) => {
       if (result.wrapperType !== "collection") return;
@@ -32,20 +39,29 @@ export class AlbumsService {
         releaseDate,
       )
       this.albums.push(album);
-      this.setArtists(album);
     });
     this.albumsChanged.next(this.albums.slice());
   }
 
+  /**
+   * Get artists list from albums
+   * @returns {Artist[]}
+   */
   getArtists() {
-    return this.artists.filter((artist, index, self) => {
-      return self.findIndex(t => t.id === artist.id) === index;
-    }).sort((a, b) => {
-      return a.name.localeCompare(b.name);
-    });
+    return this.artists.slice();
   }
 
-  setArtists(album: Album) {
-    this.artists.push(new Artist(album.artistId, album.artistName));
+  /**
+   * Set artists list from albums
+   * @param {Result[]} response
+   */
+  setArtists(response: Result[]) {
+    this.artists = [];
+    response.forEach((result: Result) => {
+      const artist = new Artist(result.artistId, result.artistName);
+      if (this.artists.find(a => a.id === artist.id)) return;
+      this.artists.push(artist);
+    });
+    this.artistsChanged.next(this.artists.slice());
   }
 }

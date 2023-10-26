@@ -11,6 +11,7 @@ export class AlbumComponent implements OnInit {
   @Input() index!: number;
   
   ngOnInit(): void {
+    
   }
 
   onClick() {

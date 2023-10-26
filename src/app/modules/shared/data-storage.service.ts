@@ -15,7 +15,7 @@ export class DataStorageService {
 
   fetchAlbums(term: string) {
     return this.http.get<Results>(
-      // `https://itunes.apple.com/search?term=tool&entity=album`
+      // `https://itunes.apple.com/search?term=kurban&entity=album`
         `https://itunes.apple.com/search?term=${term}&entity=album`
       )
       .pipe(
@@ -23,8 +23,8 @@ export class DataStorageService {
           return responseData.results;
         }),
         tap(responseData => {
-          console.log(responseData)
           this.albumsService.setAlbums(responseData);
+          this.albumsService.setArtists(responseData);
         })
       );
   }

@@ -22,7 +22,6 @@ export class AlbumListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params)
     this.route.params
       .subscribe(
         (params: Params) => {

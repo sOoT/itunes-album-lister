@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlbumsComponent } from './modules/albums/albums.component';
-import { AlbumDetailComponent } from './modules/albums/album-detail/album-detail.component';
+import { AlbumDetailComponent } from './modules/albums/album-list/album-detail/album-detail.component';
 import { AlbumListComponent } from './modules/albums/album-list/album-list.component';
 import { FiltersComponent } from './modules/albums/album-list/filters/filters.component';
 

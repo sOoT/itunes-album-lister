@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.router.navigate(['/']);
     this.dataStorageService.fetchAlbums(this.searchForm.value.search).subscribe();
   }
 }

@@ -12,7 +12,7 @@ import { DataStorageService } from 'src/app/modules/shared/data-storage.service'
 })
 export class FiltersComponent implements OnInit, OnDestroy {
   artists: Artist[];
-  albumSubscription: Subscription;
+  artistsSubscription: Subscription;
   routerSubscription: Subscription;
   selectedArtist: string;
 
@@ -24,7 +24,6 @@ export class FiltersComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route)
     this.routerSubscription = this.router.events.subscribe(data => {
       if (data instanceof ActivationStart) {
         this.selectedArtist = data.snapshot.params['artistId'];
@@ -33,19 +32,22 @@ export class FiltersComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.albumSubscription = this.albumsService.albumsChanged.subscribe(
+    this.artistsSubscription = this.albumsService.artistsChanged.subscribe(
       () => {
         this.artists = this.albumsService.getArtists();
       }
     );
   }
 
+  /**
+   * @param {string} value 
+   */
   onSelect(value: string) {
     this.router.navigate(['/albums/' + value]);
   }
 
   ngOnDestroy(): void {
-    this.albumSubscription.unsubscribe();
+    this.artistsSubscription.unsubscribe();
     this.routerSubscription.unsubscribe();
   }
 }
