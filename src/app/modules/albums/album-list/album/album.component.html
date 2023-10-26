@@ -2,10 +2,12 @@
   <figure>
     <img [src]="album.cover" [alt]="album.name" width="600" height="600">
   </figure>
-  <div>
-    <h3>{{album.name}}</h3>
-  </div>
   <a [routerLink]="['album/' + album.artistId + '/' + album.id]" (click)="onClick()"></a>
+  <div>
+    <h4 class="artist">{{album.artistName}}</h4>
+    <h3 class="name">{{album.name}}</h3>
+    <span class="genre">{{album.genre}}</span>
+  </div>
 </div>
 
-<app-album-detail></app-album-detail>
+<app-album-detail style="display: none;"></app-album-detail>

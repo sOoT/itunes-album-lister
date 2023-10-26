@@ -1,7 +1,13 @@
 <div class="filters" *ngIf="artists && artists.length > 0">
   <label for="artist-filter">
     <span>Filter by Artist</span>
-    <select [(ngModel)]="selectedArtist" name="artist-filter" id="artist-filter" class="filter" (ngModelChange)="onSelect($event)">
+    <select 
+      [(ngModel)]="selectedArtist" 
+      name="artist-filter" 
+      id="artist-filter" 
+      class="filter"
+      (ngModelChange)="onSelect($event)"
+    >
       <option *ngFor="let artist of artists" [value]="artist.id">{{artist.name}}</option>
     </select>
   </label>

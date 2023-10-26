@@ -22,7 +22,7 @@ import { FiltersComponent } from './modules/albums/album-list/filters/filters.co
     AlbumDetailComponent,
     SearchComponent,
     AlbumComponent,
-    FiltersComponent
+    FiltersComponent,
   ],
   imports: [
     AppRoutingModule,

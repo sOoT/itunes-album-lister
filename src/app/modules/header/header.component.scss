@@ -3,7 +3,6 @@
 .header {
   --grid-template-columns: 1fr;
   --gap: var(--gap-m);
-  padding-block-start: var(--gap-l);
   
   @media (min-width: #{$m}){
     --grid-template-columns: 1fr 1fr;
@@ -14,9 +13,13 @@
     --grid-template-columns: 2fr 1fr;
   }
 
+  align-items: center;
   display: grid;
   grid-template-columns: var(--grid-template-columns);
-  gap: var(--gap);
+  gap: var(--gap-m);
+  padding-block: var(--gap-m);
+  padding-inline: var(--fixed-gap);
+  border-bottom: 1px solid var(--color-grey-med1);
 
   .logo {
     --header-spacing-bottom-xl: 0;

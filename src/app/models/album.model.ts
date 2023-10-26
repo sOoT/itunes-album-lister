@@ -6,6 +6,6 @@ export class Album {
     public artistId: number,
     public artistName: string,
     public genre: string,
-    public releaseDate: Date,
+    public releaseDate: number,
   ) {}
 }

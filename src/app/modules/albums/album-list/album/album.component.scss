@@ -7,22 +7,57 @@
     max-width: 100%;
     overflow: hidden;
     position: relative;
+    height: 100%;
+
+  > figure {
+    aspect-ratio: 1;
+    position: relative;
+    width: 100%;
+
+    img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
 
   > a {
     display: block;
     inset: 0;
     position: absolute;
   }
+  
+  > div {
+    display: grid;
+    gap: var(--gap-xxs);
+    padding: var(--gap-s);
+    grid-template-areas: 
+      "title title"
+      "artist genre";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: min-content auto;
 
-  > figure {
-    aspect-ratio: 1;
-    position: relative;
-    width: 100%;
-    img {
-      display: block;
-      height: 100%;
-      object-fit: cover;
-      width: 100%;
+    .artist {
+      grid-area: artist;
+      font-weight: 500;
+      margin: 0;
+      font-size: var(--font-size-xs);
+      color: var(--color-grey-dark2);
+    }
+
+    .genre {
+      grid-area: genre;
+      font-weight: 100;
+      font-size: var(--font-size-xs);
+      color: var(--color-grey-med2);
+    }
+    
+    .name {
+      grid-area: title;
+      font-weight: 600;
+      margin: 0;
+      font-size: var(--font-size-normal);
     }
   }
 }

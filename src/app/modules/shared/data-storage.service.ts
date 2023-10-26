@@ -8,6 +8,15 @@ import { AlbumsService } from '../albums/albums.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
+
+  private config = {
+      headers:  {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With',
+      }
+  };
+
   constructor(
     private http: HttpClient,
     private albumsService: AlbumsService
@@ -16,7 +25,8 @@ export class DataStorageService {
   fetchAlbums(term: string) {
     return this.http.get<Results>(
       // `https://itunes.apple.com/search?term=kurban&entity=album`
-        `https://itunes.apple.com/search?term=${term}&entity=album`
+        `https://itunes.apple.com/search?term=${term}&entity=album`,
+        this.config
       )
       .pipe(
         map(responseData => {
@@ -31,7 +41,8 @@ export class DataStorageService {
 
   fetchAlbumsByArtist(artistId: number) {
     return this.http.get<Results>(
-      `https://itunes.apple.com/lookup?id=${artistId}&entity=album`
+      `https://itunes.apple.com/lookup?id=${artistId}&entity=album`,
+      this.config
     )
       .pipe(
         map(responseData => {
@@ -39,6 +50,21 @@ export class DataStorageService {
         }),
         tap(results => {
           this.albumsService.setAlbums(results);
+        })
+      );
+  }
+
+  fetchAlbumDetails(albumId: number) {
+    return this.http.get<Results>(
+      `https://itunes.apple.com/lookup?id=${albumId}&entity=song`,
+      this.config
+    )
+      .pipe(
+        map(responseData => {
+          return responseData.results;
+        }),
+        tap(results => {
+          this.albumsService.setAlbumDetails(results);
         })
       );
   }

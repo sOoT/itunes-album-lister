@@ -10,6 +10,8 @@ export class AlbumsService {
   artistsChanged = new Subject<Artist[]>();
   albums: Album[] = [];
   artists: Artist[] = [];
+  albumDetail: Album;
+  selectedArtist: number;
 
   /**
    * Return albums list
@@ -27,7 +29,7 @@ export class AlbumsService {
     this.albums = [];
     response.forEach((result: Result) => {
       if (result.wrapperType !== "collection") return;
-      const releaseDate = new Date(result.releaseDate);
+      const releaseDate = new Date(result.releaseDate).getFullYear();
       const cover = result.artworkUrl100.replace("100x100", "600x600");
       const album = new Album(
         result.collectionId,
@@ -63,5 +65,15 @@ export class AlbumsService {
       this.artists.push(artist);
     });
     this.artistsChanged.next(this.artists.slice());
+  }
+
+  /**
+   * Set album details
+   * @param {Result[]} response 
+   */
+  setAlbumDetails(response: Result[]) {
+    response.forEach((result: Result) => {
+
+    });
   }
 }

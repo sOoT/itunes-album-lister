@@ -17,17 +17,10 @@ export class AlbumListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private albumsService: AlbumsService,
-    private route: ActivatedRoute
+    private albumsService: AlbumsService
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          console.log(params)
-        }
-      );
     this.subscription = this.albumsService.albumsChanged
       .subscribe((albums: Album[]) => {
         this.albums = albums;

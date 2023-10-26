@@ -19,4 +19,5 @@
   display: grid;
   gap: var(--gap);
   grid-template-columns: var(--columns);
+  padding-inline: var(--fixed-gap);
 }
