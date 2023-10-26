@@ -8,6 +8,15 @@ $hd: 1280px;
 $uxga: 1600px;
 $full-hd: 1920px;
 
+$max-xs: $xs - 1;
+$max-s: $s - 1;
+$max-m: $m - 1;
+$max-l: $l - 1;
+$max-xl: $xl - 1;
+$max-hd: $hd - 1;
+$max-uxga: $uxga - 1;
+$max-full-hd: $full-hd - 1;
+
 // Colors
 $color-primary: #C7372F;
 $color-success: #67CA65;

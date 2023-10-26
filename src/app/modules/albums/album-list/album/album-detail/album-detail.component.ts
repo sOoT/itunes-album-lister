@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-album-detail',
@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./album-detail.component.scss']
 })
 export class AlbumDetailComponent implements OnInit {
+  @Input() showDetails: boolean;
+
   ngOnInit(): void {
-    
+    console.log(this.showDetails);
   }
 }

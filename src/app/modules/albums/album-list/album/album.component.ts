@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Album } from '../../../../models/album.model';
 
 @Component({
@@ -8,13 +8,13 @@ import { Album } from '../../../../models/album.model';
 })
 export class AlbumComponent implements OnInit {
   @Input() album!: Album;
-  @Input() index!: number;
+  @Output() showDetails = false;
   
   ngOnInit(): void {
-    
+
   }
 
   onClick() {
-    console.log(this.album)
+    this.showDetails = !this.showDetails;
   }
 }

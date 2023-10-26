@@ -1,13 +1,31 @@
+@import '../../../../../styles/variables';
+
 .album {
-    background-color: var(--color-white);
-    border-radius: var(--border-radius-m);
-    box-shadow: var(--box-shadow-100);
-    display: grid;
-    grid-template-rows: max-content 1fr;
-    max-width: 100%;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
+  --album-grid-template-areas: "image details";
+  --album-grid-template-rows: auto auto;
+  --album-grid-template-columns: 1fr 3fr;
+  --detail-grid-template-areas: "artist" "title" "genre";
+  --detail-padding: var(--gap-m);
+
+  @media (min-width: $m) {
+      --album-grid-template-areas: "image" "details";
+      --album-grid-template-rows: max-content 1fr;
+      --album-grid-template-columns: 1fr;
+      --detail-grid-template-areas: "title title" "artist genre";
+      --detail-padding: var(--gap-s);
+  }
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-m);
+  box-shadow: var(--box-shadow-100);
+  display: grid;
+  grid-template-areas: var(--album-grid-template-areas);
+  grid-template-rows: var(--album-grid-template-rows);
+  grid-template-columns: var(--album-grid-template-columns);
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
 
   > figure {
     aspect-ratio: 1;
@@ -31,10 +49,8 @@
   > div {
     display: grid;
     gap: var(--gap-xxs);
-    padding: var(--gap-s);
-    grid-template-areas: 
-      "title title"
-      "artist genre";
+    padding: var(--detail-padding);
+    grid-template-areas: var(--detail-grid-template-areas);
     grid-template-columns: 1fr auto;
     grid-template-rows: min-content auto;
 
@@ -48,6 +64,7 @@
 
     .genre {
       grid-area: genre;
+      place-self: end;
       font-weight: 100;
       font-size: var(--font-size-xs);
       color: var(--color-grey-med2);

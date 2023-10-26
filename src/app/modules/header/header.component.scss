@@ -3,10 +3,12 @@
 .header {
   --grid-template-columns: 1fr;
   --gap: var(--gap-m);
+  --logo-alignment: center;
   
   @media (min-width: #{$m}){
     --grid-template-columns: 1fr 1fr;
     --gap: var(--gap-l);
+    --logo-alignment: start;
   }
 
   @media (min-width: #{$l}){
@@ -26,5 +28,6 @@
 
     font-weight: var(--font-weight-bold);
     letter-spacing: calc(var(--fixed-gap) / 6 * -1);
+    text-align: var(--logo-alignment);
   }
 }
