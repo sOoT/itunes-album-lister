@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AlbumsService } from '../../albums.service';
+import { AlbumsService } from '../../../shared/albums.service';
 import { Artist } from 'src/app/models/artist.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ActivationStart, Params, Router } from '@angular/router';

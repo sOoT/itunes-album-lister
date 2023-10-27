@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'itunes'`, () => {
+  it(`should have as title 'iTunes Album Lister'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('itunes');
+    expect(app.title).toEqual('iTunes Album Lister');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('itunes app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('iTunes Album Lister app is running!');
   });
 });

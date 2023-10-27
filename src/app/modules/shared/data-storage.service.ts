@@ -4,7 +4,8 @@ import { map, tap } from 'rxjs/operators';
 
 import { Results } from 'src/app/interfaces/result.interface';
 
-import { AlbumsService } from '../albums/albums.service';
+import { AlbumsService } from './albums.service';
+import { LoaderOverlayService } from './loader-overlay.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -19,12 +20,13 @@ export class DataStorageService {
 
   constructor(
     private http: HttpClient,
-    private albumsService: AlbumsService
+    private albumsService: AlbumsService,
+    private loaderOverlayService: LoaderOverlayService
   ) {}
 
   fetchAlbums(term: string) {
+    this.loaderOverlayService.loadingStatus = true;
     return this.http.get<Results>(
-      // `https://itunes.apple.com/search?term=kurban&entity=album`
         `https://itunes.apple.com/search?term=${term}&entity=album`,
         this.config
       )
@@ -35,11 +37,13 @@ export class DataStorageService {
         tap(responseData => {
           this.albumsService.setAlbums(responseData);
           this.albumsService.setArtists(responseData);
+          this.loaderOverlayService.loadingStatus = false;
         })
       );
   }
 
   fetchAlbumsByArtist(artistId: number) {
+    this.loaderOverlayService.loadingStatus = true;
     return this.http.get<Results>(
       `https://itunes.apple.com/lookup?id=${artistId}&entity=album`,
       this.config
@@ -50,11 +54,12 @@ export class DataStorageService {
         }),
         tap(results => {
           this.albumsService.setAlbums(results);
+          this.loaderOverlayService.loadingStatus = false;
         })
       );
   }
 
-  fetchAlbumDetails(albumId: number) {
+  fetchAlbumDetail(albumId: number) {
     return this.http.get<Results>(
       `https://itunes.apple.com/lookup?id=${albumId}&entity=song`,
       this.config
@@ -64,7 +69,7 @@ export class DataStorageService {
           return responseData.results;
         }),
         tap(results => {
-          this.albumsService.setAlbumDetails(results);
+          this.albumsService.setAlbumDetail(results);
         })
       );
   }

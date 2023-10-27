@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataStorageService } from '../../shared/data-storage.service';
 import { Router } from '@angular/router';
-import { AlbumsService } from '../../albums/albums.service';
+import { AlbumsService } from '../../shared/albums.service';
 
 @Component({
   selector: 'app-search',
@@ -22,8 +22,6 @@ export class SearchComponent implements OnInit {
     this.searchForm = new FormGroup({
       search: new FormControl('')
     });
-
-    // this.dataStorageService.fetchAlbums(this.searchForm.value.search).subscribe();
   }
 
   onSubmit(): void {

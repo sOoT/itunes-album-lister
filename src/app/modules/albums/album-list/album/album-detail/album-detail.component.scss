@@ -1,0 +1,147 @@
+@import '../../../../../../styles/variables';
+
+dialog {
+  --dialog-transition: opacity var(--transition-duration-normal) var(--transition-timing-function-normal);
+  --dialog-padding: var(--gap-xxxl);
+  --album-details-grid-template-areas: "image" "details";
+  --album-details-grid-template-rows: max-content 1fr;
+  --album-details-grid-template-columns: 1fr;
+
+  @media (min-width: #{$m}) {
+    --dialog-padding: var(--gap-xl);
+    --album-details-grid-template-areas: "image details";
+    --album-details-grid-template-rows: auto auto;
+    --album-details-grid-template-columns: 16ch max-content;
+  }
+  
+  place-self: center;
+  border: 1px solid var(--color-grey-light);
+  border-radius: var(--border-radius-m);
+  box-shadow: var(--box-shadow-100);
+  display: grid;
+  gap: var(--fixed-gap-xxl);
+  grid-auto-rows: min-content;
+  height: fit-content;
+  inset: 0;
+  margin: auto;
+  max-height: calc(100vh - var(--gap-xxxxl) * 2);
+  max-width: calc(100vw - var(--gap-xxxxl) * 2);
+  opacity: 0;
+  overflow-y: auto;
+  outline: none;
+  padding: var(--dialog-padding);
+  position: fixed;
+  transition: var(--dialog-transition);
+
+  &::backdrop {
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+  }
+
+  &:not([open]) {
+    visibility: hidden;
+  }
+
+  &[open] {
+    opacity: 1;
+    &::backdrop {
+      opacity: 1;
+      background-color: var(--color-dark-overlay);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+  }
+
+  .close {
+    position: absolute;
+    cursor: pointer;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    top: var(--fixed-gap);
+    right: var(--fixed-gap);
+  }
+
+  .album-details {
+    display: grid;
+    grid-template-areas: var(--album-details-grid-template-areas);
+    grid-template-columns: var(--album-details-grid-template-columns);
+    gap: var(--gap-s);
+
+    > figure {
+      grid-area: image;
+      aspect-ratio: 1;
+      position: relative;
+      width: 100%;
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+
+    > div {
+      align-content: flex-end;
+      grid-area: details;
+      display: grid;
+      gap: var(--gap-xxxs);
+      padding: var(--detail-padding);
+      grid-template-areas: "title" "artist" "info";
+      grid-template-rows: min-content min-content min-content;
+
+      .title {
+        grid-area: title;
+        font-size: var(--font-size-xxl);
+        font-weight: var(--font-weight-extra-bold);
+        margin: 0;
+      }
+
+      .artist {
+        grid-area: artist;
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-s);
+        margin: 0;
+      }
+
+      .info {
+        grid-area: info;
+        display: flex;
+        gap: var(--gap-xxs);
+        color: var(--color-grey-med2);
+        font-size: var(--font-size-xs);
+      }
+    }
+  }
+
+  .tracklist {
+    > div {
+      display: grid;
+      gap: var(--gap-xs);
+      grid-template-areas: "number title duration";
+      grid-template-columns: max-content 1fr max-content;
+
+      .number {
+        grid-area: number;
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-grey-dark);
+      }
+
+      .title {
+        grid-area: title;
+        font-size: var(--font-size-s);
+        font-weight: var(--font-weight-medium);
+        margin: 0;
+      }
+
+      .duration {
+        grid-area: duration;
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-grey-med2);
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ export interface Results {
 
 export interface Result {
   wrapperType: string
+  kind?: string
   collectionType: string
   artistId: number
   collectionId: number
@@ -19,6 +20,10 @@ export interface Result {
   collectionPrice: number
   collectionExplicitness: string
   trackCount: number
+  trackId?: number
+  trackName?: string
+  trackNumber?: number
+  trackTimeMillis?: number
   copyright: string
   country: string
   currency: string

@@ -1,9 +1,31 @@
-<dialog>
-   <div>
-      Your country:
-       <select>...</select>
-   </div>
-   <div>
-       <button>OK</button>
-   </div>
+<dialog #dialog>
+  <span (click)="onClose()" class="close"><fa-icon [icon]="faCircleXmark"></fa-icon></span>
+  <ng-template [ngIf]="albumDetail" [ngIfElse]="noContent">
+    <div class="album-details">
+      <figure>
+        <img [src]="albumDetail.cover" [alt]="albumDetail.title" width="600" height="600">
+      </figure>
+      <div>
+        <h4 class="title">{{albumDetail.title}}</h4>
+        <h5 class="artist">{{albumDetail.artist}}</h5>
+        <div class="info">
+          <span class="genre">{{albumDetail.genre}}</span>
+          <span class="year">{{albumDetail.year}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="tracklist">
+        <div *ngFor="let track of albumDetail.tracks">
+          <span class="number">{{track.trackNumber < 10 ? '0' + track.trackNumber : track.trackNumber}}</span>
+          <span class="title">{{track.title}}</span>
+          <span class="duration">{{track.duration}}</span>
+        </div>
+    </div>
+  </ng-template>
+
+  <ng-template #noContent>
+    <div class="no-content">
+      <h3>No results for the selected album</h3>
+    </div>
+  </ng-template>
 </dialog>

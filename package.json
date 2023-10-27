@@ -1,5 +1,5 @@
 {
-  "name": "itunes",
+  "name": "itunes-album-lister",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,6 +20,8 @@
     "@angular/router": "^16.2.0",
     "@fontsource-variable/open-sans": "^5.0.18",
     "@fontsource/open-sans": "^5.0.17",
+    "@fortawesome/angular-fontawesome": "^0.13.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

@@ -44,6 +44,7 @@
     display: block;
     inset: 0;
     position: absolute;
+    cursor: pointer;
   }
   
   > div {
@@ -64,7 +65,7 @@
 
     .genre {
       grid-area: genre;
-      place-self: end;
+      place-self: flex-end;
       font-weight: 100;
       font-size: var(--font-size-xs);
       color: var(--color-grey-med2);

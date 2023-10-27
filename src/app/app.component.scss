@@ -5,3 +5,31 @@ header {
 main {
   grid-area: main;
 }
+
+.loader-overlay {
+    --background-color: var(--color-white);
+    --opacity: 0.5;
+
+    display: grid;
+    place-content: center;
+    padding: 1rem;
+    position: fixed;
+    inset: 0;
+    background-color: var(--background-color);
+    opacity: var(--opacity);
+
+    & .spinner {
+        width: 1.5rem;
+        aspect-ratio: 1;
+        line-height: 0;
+        animation: rotate270 1.4s linear infinite;
+
+        & .path {
+            stroke-dasharray: 280;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            stroke: var(--color-black);
+            animation: dash 1.4s ease-in-out infinite;
+        }
+    }
+}
