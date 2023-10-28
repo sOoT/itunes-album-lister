@@ -29,5 +29,7 @@
     font-weight: var(--font-weight-bold);
     letter-spacing: calc(var(--fixed-gap) / 6 * -1);
     text-align: var(--logo-alignment);
+    cursor: pointer;
+    display: inline-flex;
   }
 }

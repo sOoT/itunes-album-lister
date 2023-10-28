@@ -14,6 +14,7 @@ import { AlbumsComponent } from './modules/albums/albums.component';
 import { FiltersComponent } from './modules/albums/album-list/filters/filters.component';
 import { HeaderComponent } from './modules/header/header.component';
 import { SearchComponent } from './modules/header/search/search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SearchComponent } from './modules/header/search/search.component';
     FontAwesomeModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

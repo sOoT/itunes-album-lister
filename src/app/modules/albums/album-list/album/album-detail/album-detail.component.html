@@ -1,6 +1,6 @@
-<dialog #dialog>
+<dialog #dialog [@fadeIn]="state">
   <span (click)="onClose()" class="close"><fa-icon [icon]="faCircleXmark"></fa-icon></span>
-  <ng-template [ngIf]="albumDetail" [ngIfElse]="noContent">
+  <ng-template [ngIf]="albumDetail">
     <div class="album-details">
       <figure>
         <img [src]="albumDetail.cover" [alt]="albumDetail.title" width="600" height="600">
@@ -15,17 +15,17 @@
       </div>
     </div>
     <div class="tracklist">
-        <div *ngFor="let track of albumDetail.tracks">
-          <span class="number">{{track.trackNumber < 10 ? '0' + track.trackNumber : track.trackNumber}}</span>
-          <span class="title">{{track.title}}</span>
-          <span class="duration">{{track.duration}}</span>
-        </div>
-    </div>
-  </ng-template>
-
-  <ng-template #noContent>
-    <div class="no-content">
-      <h3>No results for the selected album</h3>
+        <ng-container *ngIf="albumDetail.tracks.length; else noTracks">
+          <div *ngFor="let track of albumDetail.tracks">
+            <span class="number">{{track.trackNumber < 10 ? '0' + track.trackNumber : track.trackNumber}}</span>
+                <span class="title">{{track.title}}</span>
+                <span class="duration">{{track.duration}}</span>
+          </div>
+        </ng-container>
+        <ng-template #noTracks>
+          <div class="no-tracks">No tracks found</div>
+        </ng-template>
+        
     </div>
   </ng-template>
 </dialog>

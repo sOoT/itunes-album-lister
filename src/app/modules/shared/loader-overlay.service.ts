@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderOverlayService {
-  public loading = new Subject<boolean>();
-  private _loading: boolean = false;
+  private _loading$ = new Subject<boolean>();
+  public loading = this._loading$.asObservable();
 
   constructor() {}
 
-  set loadingStatus(status: boolean) {
-    this._loading = status;
-    this.loading.next(status);
-  }
-
-  get loadingStatus(): boolean {
-    return this._loading;
+  setLoadingStatus(status: boolean) {
+    this._loading$.next(status);
   }
 }

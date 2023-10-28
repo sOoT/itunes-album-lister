@@ -34,8 +34,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
       }
     });
     this.artistsSubscription = this.albumsService.artistsChanged.subscribe(
-      () => {
-        this.artists = this.albumsService.getArtists();
+      (artists) => {
+        this.artists = artists;
       }
     );
   }

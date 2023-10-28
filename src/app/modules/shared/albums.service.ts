@@ -11,17 +11,17 @@ export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
   artistsChanged = new Subject<Artist[]>();
   albumDetailChanged = new Subject<AlbumDetail>();
-  albums: Album[] = [];
-  artists: Artist[] = [];
-  albumDetail: AlbumDetail;
-  selectedArtist: number;
+  _albums: Album[] = [];
+  _artists: Artist[] = [];
+  _albumDetail: AlbumDetail;
+  _selectedArtist: number;
 
   /**
    * Return albums list
    * @returns {Album[]}
    */
-  getAlbums() {
-    return this.albums.slice();
+  getAlbums(): Album[] {
+    return this._albums.slice();
   }
 
   /**
@@ -29,7 +29,8 @@ export class AlbumsService {
    * @param {Result[]} response
    */
   setAlbums(response: Result[]) {
-    this.albums = [];
+    if (!response.length) return;
+    this._albums = [];
     response.forEach((result: Result) => {
       if (result.wrapperType !== "collection") return;
       const releaseDate = new Date(result.releaseDate).getFullYear();
@@ -43,9 +44,9 @@ export class AlbumsService {
         result.primaryGenreName,
         releaseDate,
       )
-      this.albums.push(album);
+      this._albums.push(album);
     });
-    this.albumsChanged.next(this.albums.slice());
+    this.albumsChanged.next(this._albums.slice());
   }
 
   /**
@@ -53,7 +54,7 @@ export class AlbumsService {
    * @returns {Artist[]}
    */
   getArtists() {
-    return this.artists.slice();
+    return this._artists.slice();
   }
 
   /**
@@ -61,17 +62,17 @@ export class AlbumsService {
    * @param {Result[]} response
    */
   setArtists(response: Result[]) {
-    this.artists = [];
+    this._artists = [];
     response.forEach((result: Result) => {
       const artist = new Artist(result.artistId, result.artistName);
-      if (this.artists.find(a => a.id === artist.id)) return;
-      this.artists.push(artist);
+      if (this._artists.find(a => a.id === artist.id)) return;
+      this._artists.push(artist);
     });
-    this.artistsChanged.next(this.artists.slice());
+    this.artistsChanged.next(this._artists.slice());
   }
 
   getAlbumDetail() {
-    return this.albumDetail;
+    return this._albumDetail;
   }
 
   /**
@@ -79,35 +80,32 @@ export class AlbumsService {
    * @param {Result[]} response 
    */
   setAlbumDetail(response: Result[]) {
+    if (!response.length) return;
+    const isResponseHasSongs = response.some((result: Result) => result.kind === "song");
     const songs: Track[] = [];
-    if (response.length < 2) {
-      this.albumDetail = null;
-      this.albumDetailChanged.next(this.albumDetail);
-      return;
-    };
     response.forEach((result: Result) => {
-      if (result.kind !== "song") return;
-      const releaseDate = new Date(result.releaseDate).getFullYear();
-      const cover = result.artworkUrl100.replace("100x100", "600x600");
-      const duration = new Date(result.trackTimeMillis);
-      const durationFormatted = duration.toLocaleString("en-us", { minute: '2-digit', second: "2-digit"});
-      songs.push(new Track(
-        result.trackId,
-        result.trackName,
-        durationFormatted,
-        result.trackNumber,
-      ));
-      songs.sort((a, b) => a.trackNumber - b.trackNumber);
-      this.albumDetail = new AlbumDetail(
+      if (isResponseHasSongs && result.kind !== "song") {
+        return;
+      };
+      if (isResponseHasSongs) {
+        songs.push(new Track(
+          result.trackId,
+          result.trackName,
+          new Date(result.trackTimeMillis).toLocaleString("en-us", { minute: '2-digit', second: "2-digit"}),
+          result.trackNumber,
+        ));
+        songs.sort((a, b) => a.trackNumber - b.trackNumber);
+      }
+      this._albumDetail = new AlbumDetail(
         result.collectionId,
         result.collectionName,
         result.artistName,
-        releaseDate,
+        new Date(result.releaseDate).getFullYear(),
         result.primaryGenreName,
-        cover,
+        result.artworkUrl100.replace("100x100", "600x600"),
         songs
       );
     });
-    this.albumDetailChanged.next(this.albumDetail);
+    this.albumDetailChanged.next(this._albumDetail);
   }
 }

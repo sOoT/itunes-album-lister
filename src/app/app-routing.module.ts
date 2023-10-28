@@ -5,8 +5,8 @@ import { AlbumListComponent } from './modules/albums/album-list/album-list.compo
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '', component: AlbumsComponent, children: [
-    { path: 'albums/:artistId', component: AlbumListComponent }
+  { path: 'albums', component: AlbumsComponent, children: [
+    { path: ':artistId', component: AlbumListComponent }
   ]},
 ];
 

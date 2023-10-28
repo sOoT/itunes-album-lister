@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
-import { Results } from 'src/app/interfaces/result.interface';
+import { Result, Results } from 'src/app/interfaces/result.interface';
 
 import { AlbumsService } from './albums.service';
 import { LoaderOverlayService } from './loader-overlay.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -24,8 +25,12 @@ export class DataStorageService {
     private loaderOverlayService: LoaderOverlayService
   ) {}
 
+  /**
+   * @param { String } term 
+   * @returns { Observable<Results[]> }
+   */
   fetchAlbums(term: string) {
-    this.loaderOverlayService.loadingStatus = true;
+    this.loaderOverlayService.setLoadingStatus(true);
     return this.http.get<Results>(
         `https://itunes.apple.com/search?term=${term}&entity=album`,
         this.config
@@ -37,13 +42,13 @@ export class DataStorageService {
         tap(responseData => {
           this.albumsService.setAlbums(responseData);
           this.albumsService.setArtists(responseData);
-          this.loaderOverlayService.loadingStatus = false;
+          this.loaderOverlayService.setLoadingStatus(false);
         })
       );
   }
 
   fetchAlbumsByArtist(artistId: number) {
-    this.loaderOverlayService.loadingStatus = true;
+    this.loaderOverlayService.setLoadingStatus(true);
     return this.http.get<Results>(
       `https://itunes.apple.com/lookup?id=${artistId}&entity=album`,
       this.config
@@ -54,12 +59,13 @@ export class DataStorageService {
         }),
         tap(results => {
           this.albumsService.setAlbums(results);
-          this.loaderOverlayService.loadingStatus = false;
+          this.loaderOverlayService.setLoadingStatus(false);
         })
       );
   }
 
   fetchAlbumDetail(albumId: number) {
+    this.loaderOverlayService.setLoadingStatus(true);
     return this.http.get<Results>(
       `https://itunes.apple.com/lookup?id=${albumId}&entity=song`,
       this.config
@@ -70,6 +76,7 @@ export class DataStorageService {
         }),
         tap(results => {
           this.albumsService.setAlbumDetail(results);
+          this.loaderOverlayService.setLoadingStatus(false);
         })
       );
   }

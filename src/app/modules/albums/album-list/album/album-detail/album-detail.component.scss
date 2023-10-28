@@ -3,15 +3,17 @@
 dialog {
   --dialog-transition: opacity var(--transition-duration-normal) var(--transition-timing-function-normal);
   --dialog-padding: var(--gap-xxxl);
+  --dialog-min-width: none;
   --album-details-grid-template-areas: "image" "details";
   --album-details-grid-template-rows: max-content 1fr;
   --album-details-grid-template-columns: 1fr;
 
   @media (min-width: #{$m}) {
     --dialog-padding: var(--gap-xl);
+    --dialog-min-width: 40vw;
     --album-details-grid-template-areas: "image details";
     --album-details-grid-template-rows: auto auto;
-    --album-details-grid-template-columns: 16ch max-content;
+    --album-details-grid-template-columns: 32ch max-content;
   }
   
   place-self: center;
@@ -24,9 +26,9 @@ dialog {
   height: fit-content;
   inset: 0;
   margin: auto;
-  max-height: calc(100vh - var(--gap-xxxxl) * 2);
+  max-height: calc(100vh - var(--gap-xxxxl));
   max-width: calc(100vw - var(--gap-xxxxl) * 2);
-  opacity: 0;
+  min-width: var(--dialog-min-width);
   overflow-y: auto;
   outline: none;
   padding: var(--dialog-padding);
@@ -43,7 +45,6 @@ dialog {
   }
 
   &[open] {
-    opacity: 1;
     &::backdrop {
       opacity: 1;
       background-color: var(--color-dark-overlay);

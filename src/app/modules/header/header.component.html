@@ -1,4 +1,7 @@
 <div class="header">
-  <h1 class="logo">iTunes Album Lister</h1>
-  <app-search></app-search>
+  <div>
+    <h1 class="logo" (click)="onLogoClick()">iTunes Album Lister</h1>
+  </div>
+  <!-- <app-search [ngIf]="!isHomeRoute"></app-search> -->
+  <app-search [searchForm]="searchForm"></app-search>
 </div>
