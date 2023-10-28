@@ -1,0 +1,11 @@
+name: itunes-album-lister
+services:
+  web:
+    build:
+      context: www
+      target: builder
+    ports:
+      - 4200:4200
+    volumes:
+      - ./www:/project
+      - /project/node_modules
