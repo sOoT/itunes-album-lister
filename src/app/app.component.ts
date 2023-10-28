@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { LoaderOverlayService } from './modules/shared/loader-overlay.service';
 import { DOCUMENT } from '@angular/common';
-import { ChildrenOutletContexts, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title = 'iTunes Album Lister';

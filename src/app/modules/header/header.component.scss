@@ -1,9 +1,13 @@
 @import 'src/styles/variables';
 
-.header {
+:host .header {
   --grid-template-columns: 1fr;
+  --grid-template-rows: auto;
   --gap: var(--gap-m);
   --logo-alignment: center;
+  --padding-block: var(--gap-m);
+  --padding-inline: var(--fixed-gap);
+  --place-items: unset;
   
   @media (min-width: #{$m}){
     --grid-template-columns: 1fr 1fr;
@@ -15,12 +19,26 @@
     --grid-template-columns: 2fr 1fr;
   }
 
-  align-items: center;
+  .home & {
+    --padding-block: 0;
+    --grid-template-columns: 1fr;
+    --place-items: center;
+    --grid-template-rows: min-content min-content;
+
+    app-search {
+      width: 100%;
+      max-width: 40vw;
+    }
+  }
+
+  place-content: var(--place-items);
+  place-items: var(--place-items);
   display: grid;
   grid-template-columns: var(--grid-template-columns);
+  grid-template-rows: var(--grid-template-rows);
   gap: var(--gap-m);
-  padding-block: var(--gap-m);
-  padding-inline: var(--fixed-gap);
+  height: 100%;
+  padding: var(--padding-block) var(--padding-inline);
   border-bottom: 1px solid var(--color-grey-med1);
 
   .logo {

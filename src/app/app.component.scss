@@ -1,9 +1,22 @@
-header {
+:host header {
   grid-area: head;
+
+  .home & {
+    height: 100vh;
+
+    app-header {
+      height: 100%;
+      display: block;
+    }
+  }
 }
 
-main {
+:host main {
   grid-area: main;
+
+  .home & {
+    display: none;
+  }
 }
 
 .loader-overlay {

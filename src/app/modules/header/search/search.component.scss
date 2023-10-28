@@ -1,4 +1,4 @@
-.search-box {
+:host .search-box {
   width: 100%;
 
   input {
@@ -15,8 +15,16 @@
     outline: none;
 
     &:focus {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 .3rem .1rem var(--color-primary-light-transparent);
+      border-color: var(--color-grey-med2);
+      box-shadow: 0 0 .3rem .1rem var(--color-grey-med1);
+    }
+
+    .home & {
+      text-align: center;
+
+      &::placeholder {
+        text-align: center;
+      }
     }
   }
 }

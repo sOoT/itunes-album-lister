@@ -13,7 +13,7 @@ import { AlbumsService } from '../../../../shared/albums.service';
 import { AlbumDetail } from 'src/app/models/album-detail.model';
 import { Subscription } from 'rxjs';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { fadeIn } from 'src/app/animations/fadeIn';
 
 @Component({
   selector: 'app-album-detail',
@@ -22,17 +22,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   host: {
     '(document:keydown)': 'handleKeyboardEvents($event)'
   },
-  animations: [
-    trigger('fadeIn', [
-      state('open', style({
-        opacity: 1
-      })),
-      state('closed', style({
-        opacity: 0
-      })),
-      transition('open <=> closed', animate('250ms ease-in-out'))
-    ])
-  ]
+  animations: [fadeIn]
 })
 export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() public dialogOpened = new EventEmitter();
