@@ -3,6 +3,7 @@ import {
   Component, 
   ElementRef, 
   EventEmitter, 
+  Inject, 
   Input, 
   OnDestroy, 
   OnInit, 
@@ -14,6 +15,7 @@ import { AlbumDetail } from 'src/app/models/album-detail.model';
 import { Subscription } from 'rxjs';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { fadeIn } from 'src/app/animations/fadeIn';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-album-detail',
@@ -36,7 +38,8 @@ export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   public faCircleXmark = faCircleXmark;
 
   constructor(
-    private albumsService: AlbumsService
+    private albumsService: AlbumsService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +54,7 @@ export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'open') {
           this.state = this.dialog.nativeElement.open ? 'open' : 'closed';
+          this.document.body.classList.toggle('no-scroll', this.dialog.nativeElement.open);
         }
       });
     });

@@ -52,6 +52,7 @@ html {
   }
 
   @media (min-width: #{$xl}) {
+      --scrollbar-width: 17px;
       --main-inline-offset: max(var(--gap), calc((100vw - var(--scrollbar-width) - #{$xl}) / 2));
   }
 }

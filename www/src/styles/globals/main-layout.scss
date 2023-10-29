@@ -1,3 +1,10 @@
+body {
+  &.no-scroll {
+    overflow: hidden;
+    width: calc(100vw - var(--scrollbar-width));
+  }
+}
+
 .container {
   --container-template-areas: ". head ." ". main .";
   --container-row-gap: var(--gap);
