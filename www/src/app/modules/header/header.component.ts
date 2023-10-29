@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlbumsService } from '../shared/albums.service';
 import { SearchComponent } from './search/search.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { LocalStorageService } from '../shared/local-storage';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private albumsService: AlbumsService
+    private albumsService: AlbumsService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,8 @@ export class HeaderComponent implements OnInit {
     this.albumsService.albumsChanged.next(null);
     this.albumsService.artistsChanged.next(null);
     this.searchForm.reset();
+    this.localStorageService.removeData('artistId');
+    this.localStorageService.removeData('searchTerm');
     this.router.navigate(['/']);
   }
 

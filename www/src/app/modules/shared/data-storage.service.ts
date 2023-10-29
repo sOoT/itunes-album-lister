@@ -104,6 +104,7 @@ export class DataStorageService {
           return responseData.results;
         }),
         tap(results => {
+          console.log(results);
           this.albumsService.setAlbumDetail(results);
           this.loaderOverlayService.setLoadingStatus(false);
         })

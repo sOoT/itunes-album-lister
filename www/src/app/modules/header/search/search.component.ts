@@ -5,6 +5,7 @@ import { ActivationStart, Router } from '@angular/router';
 import { AlbumsService } from '../../shared/albums.service';
 import { Artist } from 'src/app/models/artist.model';
 import { Subscription } from 'rxjs';
+import { LocalStorageService } from '../../shared/local-storage';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private elemenRef: ElementRef,
     private dataStorageService: DataStorageService,
+    private localStorageService: LocalStorageService,
     private albumsService: AlbumsService,
     private router: Router,
     private renderer: Renderer2
@@ -56,7 +58,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.artistsSubscription = this.albumsService.artistsChanged.subscribe((artists) => {
       this.artists = artists;
-      if (this.artists.length && this.value.length) {
+      if (this.artists?.length && this.value.length) {
         this.open();
       } else {
         this.close();
@@ -73,6 +75,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.router.navigate(['/albums']);
     this.albumsSubscription = this.dataStorageService.fetchAlbums(this.value).subscribe();
+    this.localStorageService.saveData('searchTerm', this.value);
+    this.localStorageService.removeData('artistId');
     this.close();
   }
 
@@ -85,9 +89,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   onFocus(): void {
     const searchTerm = this.value;
 
-    console.log(searchTerm)
-
     if (!searchTerm) {
+      this.localStorageService.removeData('searchTerm');
       this.artists = [];
       return;
     }
@@ -109,6 +112,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     const searchTerm = this.value;
     if (!searchTerm.length) {
       this.artists = [];
+      this.localStorageService.removeData('searchTerm');
       this.close(true);
       return;
     }
@@ -169,6 +173,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.renderer.setAttribute(element, 'aria-selected', 'false');
     });
     this.renderer.setAttribute(event.currentTarget, 'aria-selected', 'true');
+    this.localStorageService.removeData('searchTerm');
     this.selectOption();
   }
 
@@ -243,10 +248,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   selectOption(): void {
     const selectedElement = this.resultsEl.nativeElement.querySelector('[aria-selected="true"]');
     const artistId = selectedElement?.getAttribute('data-value');
-    console.log(selectedElement)
 
     if (selectedElement) {
       this.dataStorageService.fetchAlbumsByArtist(+artistId).subscribe();
+      this.localStorageService.saveData('artistId', artistId);
       this.router.navigate(['/albums/' + artistId]);
       this.close(true);
     } else {

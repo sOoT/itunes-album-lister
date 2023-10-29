@@ -2,7 +2,7 @@
   <figure>
     <img [src]="album.cover" [alt]="album.name" width="600" height="600">
   </figure>
-  <a (click)="onClick()"></a>
+  <a [routerLink]="['albums/album/' + album.id]" (click)="onClick()"></a>
   <div>
     <h4 class="artist">{{album.artistName}}</h4>
     <h3 class="name">{{album.name}}</h3>

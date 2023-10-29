@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { LoaderOverlayService } from './modules/shared/loader-overlay.service';
 import { DOCUMENT } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
@@ -8,14 +8,15 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
   title = 'iTunes Album Lister';
   loading: boolean = false;
 
   constructor(
     private loaderOverlayService: LoaderOverlayService,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +28,9 @@ export class AppComponent implements OnInit {
         this.document.body.classList.toggle('home', event.url === '/');
       }
     });
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 }

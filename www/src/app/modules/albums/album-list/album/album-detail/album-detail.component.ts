@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { fadeIn } from 'src/app/animations/fadeIn';
 import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute, ActivationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-album-detail',
@@ -40,7 +41,8 @@ export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private albumsService: AlbumsService,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.albumDetailSubscription = this.albumsService.albumDetailChanged.subscribe((albumDetail) => {
@@ -58,8 +60,8 @@ export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'open') {
-          this.state = this.dialog.nativeElement.open ? 'open' : 'closed';
-          this.document.body.classList.toggle('no-scroll', this.dialog.nativeElement.open);
+          this.state = dialog.open ? 'open' : 'closed';
+          this.document.body.classList.toggle('no-scroll', dialog.open);
         }
       });
     });
