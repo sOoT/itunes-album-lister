@@ -71,6 +71,10 @@ export class AlbumsService {
     this.artistsChanged.next(this._artists.slice());
   }
 
+  /**
+   * Get selected album details
+   * @returns {AlbumDetail}
+   */
   getAlbumDetail() {
     return this._albumDetail;
   }

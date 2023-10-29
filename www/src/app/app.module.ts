@@ -11,7 +11,6 @@ import { AlbumComponent } from './modules/albums/album-list/album/album.componen
 import { AlbumDetailComponent } from './modules/albums/album-list/album/album-detail/album-detail.component';
 import { AlbumListComponent } from './modules/albums/album-list/album-list.component';
 import { AlbumsComponent } from './modules/albums/albums.component';
-import { FiltersComponent } from './modules/albums/album-list/filters/filters.component';
 import { HeaderComponent } from './modules/header/header.component';
 import { SearchComponent } from './modules/header/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AlbumDetailComponent,
     AlbumListComponent,
     AlbumsComponent,
-    FiltersComponent,
     HeaderComponent,
     SearchComponent,
   ],

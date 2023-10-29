@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
-import { Result, Results } from 'src/app/interfaces/result.interface';
+import { Results } from 'src/app/interfaces/result.interface';
 
 import { AlbumsService } from './albums.service';
 import { LoaderOverlayService } from './loader-overlay.service';
@@ -41,12 +41,37 @@ export class DataStorageService {
         }),
         tap(responseData => {
           this.albumsService.setAlbums(responseData);
+          // this.albumsService.setArtists(responseData);
+          this.loaderOverlayService.setLoadingStatus(false);
+        })
+      );
+  }
+
+  /**
+   * @param { String } term 
+   * @returns { Observable<Results[]> }
+   */
+  fetchArtists(term: string) {
+    this.loaderOverlayService.setLoadingStatus(true);
+    return this.http.get<Results>(
+        `https://itunes.apple.com/search?term=${term}&entity=album`,
+        this.config
+      )
+      .pipe(
+        map(responseData => {
+          return responseData.results;
+        }),
+        tap(responseData => {
           this.albumsService.setArtists(responseData);
           this.loaderOverlayService.setLoadingStatus(false);
         })
       );
   }
 
+  /**
+   * @param { number } artistId 
+   * @returns { Observable<Results[]> }
+   */
   fetchAlbumsByArtist(artistId: number) {
     this.loaderOverlayService.setLoadingStatus(true);
     return this.http.get<Results>(
@@ -64,6 +89,10 @@ export class DataStorageService {
       );
   }
 
+  /**
+   * @param { number } albumId 
+   * @returns { Observable<Results[]> }
+   */
   fetchAlbumDetail(albumId: number) {
     this.loaderOverlayService.setLoadingStatus(true);
     return this.http.get<Results>(

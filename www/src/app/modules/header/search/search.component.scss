@@ -1,5 +1,6 @@
 :host .search-box {
   width: 100%;
+  position: relative;
 
   input {
     width: 100%;
@@ -24,6 +25,38 @@
 
       &::placeholder {
         text-align: center;
+      }
+    }
+  }
+
+  .results {
+    display: none;
+    position: absolute;
+    width: 100%;
+    overflow-y: auto;
+    z-index: 2;
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow-100);
+
+    &.open {
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(gap-s);
+
+      li {
+        padding-inline: var(--gap-s);
+        padding-block: var(--gap-xxs);
+        cursor: pointer;
+        
+        &[aria-selected="true"], &:hover {
+          background-color: var(--color-grey-light);
+        }
       }
     }
   }

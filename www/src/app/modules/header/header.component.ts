@@ -24,6 +24,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /**
+   * When the user clicks on the logo, 
+   * we want to reset the search form
+   */
   onLogoClick() {
     this.albumsService.albumsChanged.next(null);
     this.albumsService.artistsChanged.next(null);

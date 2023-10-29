@@ -48,6 +48,11 @@ export class AlbumDetailComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  /**
+   * After the view has been initialized,
+   * we want to listen for changes to the dialog's open attribute
+   * to add the no-scroll class to the body and update state for animations.
+   */
   ngAfterViewInit(): void {
     const dialog = this.dialog.nativeElement;
     this.mutationObserver = new MutationObserver((mutations) => {

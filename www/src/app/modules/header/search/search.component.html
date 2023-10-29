@@ -1,10 +1,25 @@
 <div class="search-box">
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-    <input 
-      type="search"
-      id="search"
-      name="search"
-      formControlName="search"
-      placeholder="Search Albums in iTunes">
+    <div class="autocomplete">
+      <input 
+        #searchInput
+        type="search" 
+        id="search" 
+        name="search" 
+        formControlName="search" 
+        placeholder="Search Albums in iTunes" 
+        (input)="onInput()" 
+        (keydown)="onKeyDown($event)"
+        (keyup)="onKeyUp($event)"
+        (focus)="onFocus()"
+      >
+      <div #resultsEl class="results" [ngClass]="{'open': searchOpen}">
+        <ul>
+          <li *ngFor="let artist of artists" [attr.data-value]="artist.id" (click)="onSearchItemClick($event)">
+            {{artist.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
   </form>
 </div>
